@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 class FeatureExtractor:
-    """Extracts numerical features from HTTP request data for the Isolation Forest model."""
+    """Extracts numerical features from HTTP request data for the Isolation Forest model"""
 
     @staticmethod
     def extract_features(request_data: Dict[str, Any]) -> Dict[str, float]:
