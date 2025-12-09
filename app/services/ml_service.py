@@ -16,21 +16,21 @@ class MLService:
                 self.load_active_model()
             else:
                 print("DB not connected yet. Model will be loaded on first use.")
-   def ensure_model_loaded(self):
-        if self.model is None and db.connection is not None:
-            self.load_active_model()
-   def load_active_model(self) -> None:
-        """Load the currently active model from the database."""
-        query = "SELECT model_version, model_data FROM models WHERE is_active = TRUE LIMIT 1"
-        result = db.fetch_one(query)
-
-        if result:
-            self.model_version = result["model_version"]
-            self.model = pickle.loads(result["model_data"])
-            print(f"Loaded active model: {self.model_version}")
-        else:
-            print("No active model found. Please train a model first.")
-
+   def load_active_model(self):
+        """Load the currently active model from database."""
+        try:
+            query = "SELECT model_version, model_data FROM models WHERE is_active = TRUE LIMIT 1"
+            result = db.fetch_one(query)
+            
+            if result:
+                self.model_version = result['model_version']
+                self.model = pickle.loads(result['model_data'])
+                print(f"✓ Loaded active model: {self.model_version}")
+            else:
+                print("⚠ No active model found. Please train a model first.")
+        except Exception as e:
+            print(f"✗ Error loading model: {e}")
+            raise
    def predict(self, features: Dict[str, float]) -> Tuple[bool, float]:
         """
         Predict if a request is anomalous.
