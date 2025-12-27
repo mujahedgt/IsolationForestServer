@@ -13,7 +13,7 @@ router = APIRouter(prefix="/training", tags=["Training"])
 @router.post("/train", response_model=TrainResponse)
 async def train_model(request: TrainRequest):
     """
-    Train a brand new Isolation Forest model.
+    Training a brand new Isolation Forest model.
     Accepts optional training parameters (contamination, n_estimators).
     """
     try:

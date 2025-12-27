@@ -112,11 +112,11 @@ class MLService:
             "model_version": model_version,
             "training_samples": len(training_data),
             "training_duration_seconds": round(duration, 2),
-            "message": "Model trained and activated successfully"
+            "message": "Model trained and activated successfullY"
         }
 
    def retrain_model(self, new_model_version: str) -> Dict[str, Any]:
-        """Retrain model using corrected user labels."""
+        """Retraining model using corrected user labels."""
         old_version = self.model_version or "none"
 
         count_query = "SELECT COUNT(*) as count FROM analyzed_requests WHERE user_label IS NOT NULL"
