@@ -14,43 +14,50 @@ class AnalyzeRequest(BaseModel):
 
 
 class AnalyzeResponse(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+    
     request_id: str
     isAnomaly: bool
     confidence: float
     model_version: Optional[str] = None
     analyzed_at: datetime
-    model_config = ConfigDict(protected_namespaces=())
+
 
 class TrainRequest(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+    
     model_version: str
     use_corrected_labels: bool = True
     training_params: Optional[Dict[str, Any]] = None
-    model_config = ConfigDict(protected_namespaces=())
 
 
 class TrainResponse(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+    
     success: bool
     model_version: str
     training_samples: int
+    detected_anomaly_ratio: Optional[float] = None
     training_duration_seconds: float
-    accuracy_score: Optional[float] = None
     message: str
-    model_config = ConfigDict(protected_namespaces=())
 
 
 class RetrainRequest(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+    
     model_version: str
+    recalculate_features: bool = False
 
 
 class RetrainResponse(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+    
     success: bool
     old_model_version: str
     new_model_version: str
     training_samples: int
     corrected_labels_used: int
-    accuracy_improvement: Optional[float] = None
     message: str
-    model_config = ConfigDict(protected_namespaces=())
 
 
 class LabelUpdateRequest(BaseModel):
@@ -67,6 +74,8 @@ class LabelUpdateResponse(BaseModel):
 
 
 class StatisticsResponse(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+    
     total_requests_analyzed: int
     anomaly_count: int
     legitimate_count: int
@@ -75,3 +84,6 @@ class StatisticsResponse(BaseModel):
     label_corrections: Dict[str, int]
     average_confidence: float
     uptime_hours: float
+    """
+    Server statistics and model performance metrics.
+    """

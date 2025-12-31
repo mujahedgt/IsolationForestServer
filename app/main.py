@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import db
-from app.routes import analyze, training, audit, labeling, statistics
+from app.routes import analyze, training, audit, labeling, statistics, gathering  # Added gathering
 import uvicorn
 
 # ------------------------------------------------------------------
@@ -48,6 +48,7 @@ app.include_router(training.router,     tags=["Training"])
 app.include_router(audit.router,        tags=["Audit"])
 app.include_router(labeling.router,     tags=["Labeling"])
 app.include_router(statistics.router,   tags=["Statistics"])
+app.include_router(gathering.router,    tags=["Gathering Mode"])  # New: Gathering endpoints
 
 # ------------------------------------------------------------------
 # Health Check / Root Endpoint
