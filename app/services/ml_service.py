@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.ensemble import IsolationForest
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Any
-from feature_extractor import FeatureExtractor
+from app.services.feature_extractor import FeatureExtractor
 
 from app.database import db
 
