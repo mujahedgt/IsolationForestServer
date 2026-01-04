@@ -322,19 +322,20 @@ class FeatureExtractor:
     # ========================================================================
     # Enhanced Feature Extraction Methods (using calibration)
     # ========================================================================
-
+    
     def extract_features(self, request_data: Dict[str, Any]) -> Dict[str, float]:
         """
         Extract features using calibrated thresholds and learned patterns.
         Falls back to base extraction if not calibrated.
         """
         features: Dict[str, float] = {}
-
+        print("✓ Extracted features for analysis")
         features['ip_reputation_score'] = self._calculate_ip_reputation(request_data['ip_address'])
         features['payload_complexity_score'] = self._calculate_payload_complexity(request_data.get('payload'))
         features['header_anomaly_score'] = self._calculate_header_anomaly(request_data['headers'])
         features['endpoint_risk_score'] = self._calculate_endpoint_risk(request_data['endpoint'])
         features['frequency_score'] = self._calculate_frequency_score(request_data['ip_address'])
+        print("✓ Extracted features for analysis")
         features['injection_score'] = self._calculate_injection_score(
             request_data.get('payload'),
             request_data['endpoint'],
